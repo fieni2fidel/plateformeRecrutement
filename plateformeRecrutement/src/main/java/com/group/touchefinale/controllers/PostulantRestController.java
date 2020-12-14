@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,12 +15,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.group.touchefinale.dao.EntrepriseRepository;
 import com.group.touchefinale.dao.NivodaccesRepository;
 import com.group.touchefinale.dao.PostulantRepository;
 import com.group.touchefinale.dao.UtilisateurRepository;
+import com.group.touchefinale.entities.Entreprise;
 import com.group.touchefinale.entities.Postulant;
 import com.group.touchefinale.entities.Utilisateur;
 
@@ -47,6 +52,24 @@ public class PostulantRestController {
 		
 		return utilisateurRepository.findByMailutilisateur(mailuser);
 	}
+	
+	
+	@GetMapping("/postulantsearch")
+	public Page<Postulant> listePostulantx(
+			@RequestParam(name = "nom", defaultValue = "") String nom,
+			@RequestParam(name = "prenom", defaultValue = "") String prenom,
+			@RequestParam(name = "ville", defaultValue = "") String ville,
+			@RequestParam(name = "pays", defaultValue = "") String pays,
+			@RequestParam(name = "page", defaultValue = "0") int page,
+			@RequestParam(name = "size", defaultValue = "10") int size){	
+		
+		Page<Postulant>cl=postulantRepository.postulan
+				("%"+nom+"%","%"+prenom+"%","%"+ville+"%","%"+pays+"%",PageRequest.of(page,size,Sort.by("idutilisateur").descending()));
+		
+		return cl;		
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////
 	
 	
 	@GetMapping("/postulantsx")

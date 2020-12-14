@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,12 +14,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.group.touchefinale.dao.AnnonceRepository;
 import com.group.touchefinale.dao.EntrepriseRepository;
 import com.group.touchefinale.dao.NivodaccesRepository;
 import com.group.touchefinale.entities.Annonce;
+import com.group.touchefinale.entities.Entreprise;
 import com.group.touchefinale.entities.Mission;
 import com.group.touchefinale.entities.Nivodacces;
 
@@ -42,7 +47,38 @@ public class AnnonceRestController {
 	  List<Annonce>listcl=annonceRepository.findByMailentreprise(mailutilisateur); 
 	  return listcl;
 	  }
+	  
+	  @GetMapping("/annoncesatconstraintmailsearch")
+	  public Page<Annonce>listeAnnonceAtConstraintMailSearch(
+		@RequestParam(name="mail") String mailutilisateur,
+		@RequestParam(name = "annonce", defaultValue = "") String annonce,
+		@RequestParam(name = "ville", defaultValue = "") String ville,
+		@RequestParam(name = "pays", defaultValue = "") String pays,
+		@RequestParam(name = "page", defaultValue = "0") int page,
+		@RequestParam(name = "size", defaultValue = "10") int size)
+	  {
+	  Page<Annonce>listcl=annonceRepository.findByMailentreprisex(mailutilisateur,
+			  "%"+annonce+"%","%"+ville+"%","%"+pays+"%",
+				PageRequest.of(page,size,Sort.by("idannonce").descending())); 
+	  return listcl;
+	  }
 	 
+	  
+		@GetMapping("/annoncesearch")
+		public Page<Annonce> listeAnnoncex(
+				@RequestParam(name = "annonce", defaultValue = "") String annonce,
+				@RequestParam(name = "entreprise", defaultValue = "") String entreprise,
+				@RequestParam(name = "ville", defaultValue = "") String ville,
+				@RequestParam(name = "pays", defaultValue = "") String pays,
+				@RequestParam(name = "page", defaultValue = "0") int page,
+				@RequestParam(name = "size", defaultValue = "10") int size){	
+			
+			Page<Annonce>cl=annonceRepository.annonx
+					("%"+annonce+"%","%"+entreprise+"%","%"+ville+"%","%"+pays+"%",
+							PageRequest.of(page,size,Sort.by("idannonce").descending()));
+			
+			return cl;		
+		}
 	
 	/*
 	 * @GetMapping("/annoncesatconstraintDeux/{id}") public List<Annonce>
@@ -50,6 +86,8 @@ public class AnnonceRestController {
 	 * List<Annonce>listcl=annonceRepository.findAnnonceWithUtilisateur(id); return
 	 * listcl; }
 	 */
+	  
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@GetMapping("/annoncesx")
 	public List<Annonce> listeAnnonce(){	

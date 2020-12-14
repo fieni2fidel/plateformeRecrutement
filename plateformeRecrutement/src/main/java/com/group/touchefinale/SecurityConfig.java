@@ -55,11 +55,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 	  http
 	  	.authorizeRequests()
 	  		.antMatchers("/login/**").permitAll()
-	  		.antMatchers("/entreprisesx/**","/postulantsx/**","/annoncesx/**","/autreinfosx/**","/missionsx/**",
-	  				"/mailutilisateur/**","/annoncesatconstraintUn/**","/annoncesatconstraintMail/**",
-	  				"/annoposts/**","/annopostsx/**","/","/idannopost/**","/sendEmail/**","/sendAcceptHtmlEmail/**",
-	  				"/sendRefusHtmlEmail/**","/idEntrepriseForAnnopost/**","/idPostulantForAnnopost/**",
-	  				"/decisionannopostsx/**","/idAnnonceForAnnopost/**").permitAll();			
+	  		.antMatchers("/entreprisesx/**","/entreprises/**","/postulantsx/**","/postulants/**","/annoncesx/**","/autreinfosx/**",
+	  				"/missionsx/**","/mailutilisateur/**","/annoncesatconstraintUn/**","/annoncesatconstraintMail/**",
+	  				     "/annoposts/**","/annopostsx/**","/","/idannopost/**","/sendEmail/**","/sendAcceptHtmlEmail/**",
+	  				     "/sendRefusHtmlEmail/**","/idEntrepriseForAnnopost/**","/idPostulantForAnnopost/**",
+	  				     "/decisionannopostsx/**","/idAnnonceForAnnopost/**","/testentreprisesx/**",
+	  				     "/nivodacceses/**","/nivodaccesesx/**","/modifypasswordentreprisesx/**","/annoncesatconstraintmailsearch/**",
+	  				   "/entreprisesearch/**","/postulantsearch/**","/annoncesearch/**","/byRecruteurOrEntreprise/**").permitAll();	
 	  
 /*	
 	http
