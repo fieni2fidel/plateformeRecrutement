@@ -61,7 +61,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 	  				     "/sendRefusHtmlEmail/**","/idEntrepriseForAnnopost/**","/idPostulantForAnnopost/**",
 	  				     "/decisionannopostsx/**","/idAnnonceForAnnopost/**","/testentreprisesx/**",
 	  				     "/nivodacceses/**","/nivodaccesesx/**","/modifypasswordentreprisesx/**","/annoncesatconstraintmailsearch/**",
-	  				   "/entreprisesearch/**","/postulantsearch/**","/annoncesearch/**","/byRecruteurOrEntreprise/**").permitAll();	
+	  				   "/entreprisesearch/**","/postulantsearch/**","/annoncesearch/**","/byRecruteurOrEntreprise/**",
+	  				 "/experienceprofsx/**","/experienceprofs/**","/diplomes/**","/diplomesx/**",
+	  				"/competencesx/**","/competences/**","/currivitaesx/**","/currivitaes/**",
+	  				"/modifypasswordpostulantsx/**").permitAll();	
 	  
 /*	
 	http

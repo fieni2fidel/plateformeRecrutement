@@ -39,6 +39,8 @@ public abstract class Utilisateur implements Serializable{
 	
 	private String passwordutilisateur;
 	
+	private String motsecret;
+	
 	private String imageutilisateur;
 	
 	private String adresseutilisateur;
@@ -72,11 +74,12 @@ public abstract class Utilisateur implements Serializable{
 	}
 
 
-	public Utilisateur(String mailutilisateur, String passwordutilisateur, String imageutilisateur,
+	public Utilisateur(String mailutilisateur, String passwordutilisateur, String motsecret ,String imageutilisateur,
 			String adresseutilisateur, String villeutilisateur, String paysutilisateur, Date datecreationutilisateur) {
 		super();
 		this.mailutilisateur = mailutilisateur;
 		this.passwordutilisateur = passwordutilisateur;
+		this.motsecret = motsecret;
 		this.imageutilisateur = imageutilisateur;
 		this.adresseutilisateur = adresseutilisateur;
 		this.villeutilisateur = villeutilisateur;
@@ -120,6 +123,16 @@ public abstract class Utilisateur implements Serializable{
 
 	public void setPasswordutilisateur(String passwordutilisateur) {
 		this.passwordutilisateur = passwordutilisateur;
+	}
+	
+	
+	public String getMotsecret() {
+		return motsecret;
+	}
+
+
+	public void setMotsecret(String motsecret) {
+		this.motsecret = motsecret;
 	}
 
 

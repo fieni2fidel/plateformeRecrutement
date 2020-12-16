@@ -42,11 +42,10 @@ public class Entreprise extends Utilisateur{
 		// TODO Auto-generated constructor stub
 	}
 
-
-	public Entreprise(String mailutilisateur, String passwordutilisateur, String imageutilisateur,
+	public Entreprise(String mailutilisateur, String passwordutilisateur, String motsecret, String imageutilisateur,
 			String adresseutilisateur, String villeutilisateur, String paysutilisateur, Date datecreationutilisateur,
 			String nomdurecruteurentreprise, String descriptionentreprise, String nomentreprise) {
-		super(mailutilisateur, passwordutilisateur, imageutilisateur, adresseutilisateur, villeutilisateur,
+		super(mailutilisateur, passwordutilisateur, motsecret, imageutilisateur, adresseutilisateur, villeutilisateur,
 				paysutilisateur, datecreationutilisateur);
 		this.nomdurecruteurentreprise = nomdurecruteurentreprise;
 		this.descriptionentreprise = descriptionentreprise;

@@ -4,12 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import com.group.touchefinale.entities.Nivodacces;
+import com.group.touchefinale.entities.Experienceprof;
 
 @CrossOrigin("*")
 @RepositoryRestResource
-public interface NivodaccesRepository extends JpaRepository<Nivodacces, Long>{
-	/*
-	 * public Nivodacces findByNomnivodacces(String nomnivodacces);
-	 */
-	}
+public interface ExperienceprofRepository extends JpaRepository<Experienceprof, Long>{
+
+}

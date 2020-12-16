@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 @Entity
 public class Competence implements Serializable{
 		
@@ -24,7 +27,7 @@ public class Competence implements Serializable{
 		@ManyToOne
 		@NotFound(action = NotFoundAction.IGNORE)
 		@JoinColumn
-		private Diplome diplome;
+		private Postulant postulant;
 
 		public Competence() {
 			super();
@@ -52,13 +55,26 @@ public class Competence implements Serializable{
 			this.nomcompetence = nomcompetence;
 		}
 
-		public Diplome getDiplome() {
-			return diplome;
+		@JsonIgnore
+		public Postulant getPostulant() {
+			return postulant;
 		}
 
-		public void setDiplome(Diplome diplome) {
-			this.diplome = diplome;
+		@JsonSetter
+		public void setPostulant(Postulant postulant) {
+			this.postulant = postulant;
 		}
+
+	/*
+	 * @JsonIgnore public Diplome getDiplome() { return diplome; }
+	 * 
+	 * @JsonSetter public void setDiplome(Diplome diplome) { this.diplome = diplome;
+	 * }
+	 */
+		
+		
+		
+	
 		
 		
 

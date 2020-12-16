@@ -7,9 +7,15 @@ import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -20,14 +26,31 @@ public class Postulant extends Utilisateur{
 
 	
 	private String nompostulant;
-	private String prenompostulant;
+	private String prenompostulant;	
 	private String sexepostulant;
+	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date datedenaissancepostulant;
+	
 	private String civilitepostulant;
 	private String situationmatrimonialepostulant;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="annonce",cascade = CascadeType.ALL )
+	@ManyToOne
+	@NotFound(action = NotFoundAction.IGNORE)
+	@JoinColumn
+	private Currivitae currivitae;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="postulant",cascade = CascadeType.ALL )
 	private Collection<Annopost>annoposts;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="postulant",cascade = CascadeType.ALL )
+	private Collection<Diplome>diplomes;
+	
+	 @OneToMany(fetch = FetchType.LAZY, mappedBy="postulant",cascade = CascadeType.ALL )
+	 private Collection<Competence>competences;
+	 
+	 @OneToMany(fetch = FetchType.LAZY, mappedBy="postulant",cascade = CascadeType.ALL )
+	 private Collection<Experienceprof>experienceprofs;
 	  
 	  
 	public Postulant() {
@@ -36,11 +59,11 @@ public class Postulant extends Utilisateur{
 	}
 
 	
-	public Postulant(String mailutilisateur, String passwordutilisateur, String imageutilisateur,
+	public Postulant(String mailutilisateur, String passwordutilisateur, String motsecret, String imageutilisateur,
 			String adresseutilisateur, String villeutilisateur, String paysutilisateur, Date datecreationutilisateur,
 			String nompostulant, String prenompostulant, String sexepostulant, Date datedenaissancepostulant,
 			String civilitepostulant, String situationmatrimonialepostulant) {
-		super(mailutilisateur, passwordutilisateur, imageutilisateur, adresseutilisateur, villeutilisateur,
+		super(mailutilisateur, passwordutilisateur, motsecret, imageutilisateur, adresseutilisateur, villeutilisateur,
 				paysutilisateur, datecreationutilisateur);
 		this.nompostulant = nompostulant;
 		this.prenompostulant = prenompostulant;
@@ -49,6 +72,7 @@ public class Postulant extends Utilisateur{
 		this.civilitepostulant = civilitepostulant;
 		this.situationmatrimonialepostulant = situationmatrimonialepostulant;
 	}
+
 
 
 
@@ -123,6 +147,47 @@ public class Postulant extends Utilisateur{
 		this.annoposts = annoposts;
 	}
 
+
+	public Currivitae getCurrivitae() {
+		return currivitae;
+	}
+
+
+	public void setCurrivitae(Currivitae currivitae) {
+		this.currivitae = currivitae;
+	}
+
+
+	public Collection<Diplome> getDiplomes() {
+		return diplomes;
+	}
+
+
+	public void setDiplomes(Collection<Diplome> diplomes) {
+		this.diplomes = diplomes;
+	}
+
+
+	public Collection<Competence> getCompetences() {
+		return competences;
+	}
+
+
+	public void setCompetences(Collection<Competence> competences) {
+		this.competences = competences;
+	}
+
+
+	public Collection<Experienceprof> getExperienceprofs() {
+		return experienceprofs;
+	}
+
+
+	public void setExperienceprofs(Collection<Experienceprof> experienceprofs) {
+		this.experienceprofs = experienceprofs;
+	}
+
+	
 	
 	  
 }

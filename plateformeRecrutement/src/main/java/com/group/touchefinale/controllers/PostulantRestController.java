@@ -53,6 +53,30 @@ public class PostulantRestController {
 		return utilisateurRepository.findByMailutilisateur(mailuser);
 	}
 	
+	@PostMapping("/modifypasswordpostulantsx")	
+	public String modifypasswordPostulant(@RequestBody Postulant cl){
+		
+		Utilisateur user= utilisateurRepository.findByMailutilisateur(cl.getMailutilisateur());
+		
+		
+		if(cl.getMotsecret().equals(user.getMailutilisateur())) {
+			
+			user.setPasswordutilisateur(cl.getPasswordutilisateur());
+			
+			String hashPW=bCryptPasswordEncoder.encode(user.getPasswordutilisateur());
+			  user.setPasswordutilisateur(hashPW);	
+			  
+			  utilisateurRepository.save(user); 
+			
+			  return "ok";
+		}else {
+			
+			throw new RuntimeException("Mot de passe incorrect");	        
+	        
+		}		
+		
+	}
+	
 	
 	@GetMapping("/postulantsearch")
 	public Page<Postulant> listePostulantx(

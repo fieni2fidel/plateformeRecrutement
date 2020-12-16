@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 @Entity
 public class Experienceprof implements Serializable{
 
@@ -26,7 +29,7 @@ public class Experienceprof implements Serializable{
 		@ManyToOne
 		@NotFound(action = NotFoundAction.IGNORE)
 		@JoinColumn
-		private Diplome diplome;
+		private Postulant postulant;
 
 		public Experienceprof() {
 			super();
@@ -72,14 +75,23 @@ public class Experienceprof implements Serializable{
 		public void setFonctionexperienceprof(String fonctionexperienceprof) {
 			this.fonctionexperienceprof = fonctionexperienceprof;
 		}
-
-		public Diplome getDiplome() {
-			return diplome;
+		
+		@JsonIgnore
+		public Postulant getPostulant() {
+			return postulant;
 		}
 
-		public void setDiplome(Diplome diplome) {
-			this.diplome = diplome;
+		@JsonSetter
+		public void setPostulant(Postulant postulant) {
+			this.postulant = postulant;
 		}
+
+	/*
+	 * @JsonIgnore public Diplome getDiplome() { return diplome; }
+	 * 
+	 * @JsonSetter public void setDiplome(Diplome diplome) { this.diplome = diplome;
+	 * }
+	 */
 		
 		
 		

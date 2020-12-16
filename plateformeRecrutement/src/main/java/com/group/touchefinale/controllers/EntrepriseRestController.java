@@ -43,11 +43,6 @@ import com.group.touchefinale.service.ModifyPassword;
 @RestController
 public class EntrepriseRestController {
 	
-	/*
-	 * @Autowired private AuthroleRepository authroleRepository;
-	 */
-	
-	
 	 @Autowired 
 	 private BCryptPasswordEncoder bCryptPasswordEncoder;	 
 	 
@@ -70,27 +65,14 @@ public class EntrepriseRestController {
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////:::
 	
 	@PostMapping("/modifypasswordentreprisesx")	
-	public String modifypasswordEntreprise(@RequestBody ModifyPassword cl) throws JsonParseException, JsonMappingException, IOException {
+	public String modifypasswordEntreprise(@RequestBody Entreprise cl){
 		
-		Utilisateur user= utilisateurRepository.findByMailutilisateur(cl.getMail());
+		Utilisateur user= utilisateurRepository.findByMailutilisateur(cl.getMailutilisateur());
 		
-		boolean XX=authenticationManager.authenticate
-		(new UsernamePasswordAuthenticationToken(cl.getMail(),cl.getOldpassword())) != null;
 		
-		 
-		// String XhashPW=bCryptPasswordEncoder.encode(cl.getOldpassword());
-		
-		/*
-		 * System.out.println("get oldpassword ==> "+cl.getOldpassword());
-		 * System.out.println("get utilisteur ==> "+clt);
-		 * System.out.println("get password utilisteur ==> "+clt.getPasswordutilisateur(
-		 * ));
-		 */
-		//System.out.println("XhashPW ==> "+XhashPW);
-		
-		if(XX) {
+		if(cl.getMotsecret().equals(user.getMailutilisateur())) {
 			
-			user.setPasswordutilisateur(cl.getNewpassword());
+			user.setPasswordutilisateur(cl.getPasswordutilisateur());
 			
 			String hashPW=bCryptPasswordEncoder.encode(user.getPasswordutilisateur());
 			  user.setPasswordutilisateur(hashPW);	

@@ -18,6 +18,9 @@ import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 @Entity
 public class Diplome implements Serializable{
 	
@@ -35,11 +38,13 @@ public class Diplome implements Serializable{
 	@JoinColumn
 	private Postulant postulant;
 	  
-	 @OneToMany(fetch = FetchType.LAZY, mappedBy="diplome",cascade = CascadeType.ALL )
-	 private Collection<Competence>competences;
-	 
-	 @OneToMany(fetch = FetchType.LAZY, mappedBy="diplome",cascade = CascadeType.ALL )
-	 private Collection<Experienceprof>experienceprofs;
+	/*
+	 * @OneToMany(fetch = FetchType.LAZY, mappedBy="diplome",cascade =
+	 * CascadeType.ALL ) private Collection<Competence>competences;
+	 * 
+	 * @OneToMany(fetch = FetchType.LAZY, mappedBy="diplome",cascade =
+	 * CascadeType.ALL ) private Collection<Experienceprof>experienceprofs;
+	 */
 
 	public Diplome() {
 		super();
@@ -76,30 +81,28 @@ public class Diplome implements Serializable{
 		this.anneediplome = anneediplome;
 	}
 
+	@JsonIgnore
 	public Postulant getPostulant() {
 		return postulant;
 	}
 
+	@JsonSetter
 	public void setPostulant(Postulant postulant) {
 		this.postulant = postulant;
 	}
 
-	public Collection<Competence> getCompetences() {
-		return competences;
-	}
-
-	public void setCompetences(Collection<Competence> competences) {
-		this.competences = competences;
-	}
-
-	public Collection<Experienceprof> getExperienceprofs() {
-		return experienceprofs;
-	}
-
-	public void setExperienceprofs(Collection<Experienceprof> experienceprofs) {
-		this.experienceprofs = experienceprofs;
-	}
-	 
+	/*
+	 * public Collection<Competence> getCompetences() { return competences; }
+	 * 
+	 * public void setCompetences(Collection<Competence> competences) {
+	 * this.competences = competences; }
+	 * 
+	 * public Collection<Experienceprof> getExperienceprofs() { return
+	 * experienceprofs; }
+	 * 
+	 * public void setExperienceprofs(Collection<Experienceprof> experienceprofs) {
+	 * this.experienceprofs = experienceprofs; }
+	 */
 	 
 
 }
